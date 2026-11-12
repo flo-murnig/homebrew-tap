@@ -50,52 +50,24 @@ brew install --cask ./macpackmate.rb    # lokal testen
 brew uninstall --zap --cask macpackmate # zap-Liste testen
 ```
 
-Dann einen Pull Request gegen [Homebrew/homebrew-cask](https://github.com/Homebrew/homebrew-cask) mit `Casks/m/macpackmate.rb` stellen (Titel: `macpackmate 0.37.0 (new cask)`).
+Dann einen Pull Request gegen [Homebrew/homebrew-cask](https://github.com/Homebrew/homebrew-cask) mit `Casks/m/macpackmate.rb` stellen (Titel: `macpackmate 0.47.0 (new cask)`).
 
-### Vorlage `Casks/macpackmate.rb`
+### Die Cask-Datei
 
-```ruby
-cask "macpackmate" do
-  version "0.37.0"
-  sha256 "HIER_SHA256_DES_DMG"
+Die fertige Cask liegt im Projekt unter [`Casks/macpackmate.rb`](../Casks/macpackmate.rb) (Version 0.47.0, SHA-256 des DMG eingetragen, `brew style` ohne Beanstandung). Für das Tap die Datei unverändert nach `Casks/macpackmate.rb` im Repository `homebrew-tap` kopieren.
 
-  url "https://dynamo.at/macpackmate/MacPackMate-#{version}.dmg"
-  name "MacPackMate"
-  desc "Package manager hub: Homebrew, npm, pip, Cargo, Nix and more in one list"
-  homepage "https://dynamo.at/macpackmate/"
-
-  livecheck do
-    url "https://dynamo.at/macpackmate/appcast.xml"
-    strategy :sparkle, &:short_version
-  end
-
-  auto_updates true
-  depends_on macos: ">= :sonoma"
-
-  app "MacPackMate.app"
-  binary "#{appdir}/MacPackMate.app/Contents/Helpers/macpackmate"
-
-  zap trash: [
-    "~/Library/Application Support/MacPackMate",
-    "~/Library/Caches/at.dynamo.MacPackMate",
-    "~/Library/Preferences/at.dynamo.MacPackMate.plist",
-    "~/Library/Saved Application State/at.dynamo.MacPackMate.savedState",
-  ]
-end
-```
-
-Die `zap`-Pfade vor dem Veröffentlichen mit `ls ~/Library/*/ | grep -i macpackmate` gegenprüfen.
+Die `zap`-Pfade stammen aus den Ordnern, die App, CLI und Hintergrundprüfung tatsächlich anlegen; vor dem Veröffentlichen mit `ls ~/Library/*/ | grep -i macpackmate` gegenprüfen.
 
 ### SHA-256 ermitteln
 
 ```sh
-shasum -a 256 ~/Library/Caches/MacPackMate/release/updates/MacPackMate-0.37.0.dmg
+shasum -a 256 ~/Library/Caches/MacPackMate/release/updates/MacPackMate-0.47.0.dmg
 ```
 
 ### Bei jeder neuen Version
 
 1. `make dist` und die Dateien aus `updates/` auf `dynamo.at/macpackmate/` hochladen (DMG + `appcast.xml`).
-2. Im Cask `version` und `sha256` ändern.
+2. In `Casks/macpackmate.rb` `version` und `sha256` ändern (`shasum -a 256 …/updates/MacPackMate-<version>.dmg`).
 3. Tap: committen und pushen. Offizielles Cask: macht der Bot (`BrewTestBot`) automatisch über `livecheck`, sobald der Appcast die neue Version zeigt.
 
 ---
