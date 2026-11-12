@@ -4,6 +4,11 @@ Homebrew tap for **[MacPackMate](https://dynamo.at/macpackmate/)** by Flo Murnig
 
 *Deutsche Kurzfassung am Ende.*
 
+<picture>
+  <source media="(prefers-color-scheme: dark)" srcset="img/app-window-dark.png">
+  <img src="img/app-window-light.png" alt="MacPackMate: all installed packages from 30+ sources in one list">
+</picture>
+
 ## Install
 
 ```sh
@@ -37,6 +42,25 @@ One hub for every package manager and install source on your Mac. MacPackMate sc
 - Full history with logs, notes and profiles, backup and restore via a single pack file (also Brewfile import/export) – ideal for setting up a new Mac
 - Admin rights without stored passwords; no telemetry
 - Detailed manual with 28 chapters (in the app with ⌘?, or `macpackmate guide`)
+
+### Screenshots
+
+Real app, neutral demo data.
+
+<picture>
+  <source media="(prefers-color-scheme: dark)" srcset="img/app-sources-dark.png">
+  <img src="img/app-sources-light.png" alt="All sources in the sidebar">
+</picture>
+
+<picture>
+  <source media="(prefers-color-scheme: dark)" srcset="img/app-security-dark.png">
+  <img src="img/app-security-light.png" alt="Security report via OSV.dev">
+</picture>
+
+<picture>
+  <source media="(prefers-color-scheme: dark)" srcset="img/app-results-dark.png">
+  <img src="img/app-results-light.png" alt="Result window after Update all">
+</picture>
 
 ```sh
 macpackmate                                # scan everything
